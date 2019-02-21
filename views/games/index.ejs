@@ -1,0 +1,15 @@
+<% include ../partials/header.ejs %>
+<h1>My Awesome Games</h1>
+<% games.forEach(function(game) { %>
+<div>
+  <a href='#'>edit></a>
+  <form method='POST' action='/games/<%= game.id %>?_method=DELETE'>
+    <input type='submit' value='delete'>
+  </form>
+  <a href='/games/<%= game.id%>'><%= game.name %></a>
+
+</div>
+
+<% }); %>
+
+<% include ../partials/footer.ejs %>
