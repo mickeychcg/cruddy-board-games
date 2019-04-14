@@ -26,8 +26,10 @@ module.exports = {
         type: Sequelize.DATE
       }
     });
-  },
-  down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('games');
   }
 };
+
+down: (queryInterface, Sequelize) => {
+  return queryInterface.dropTable('games');
+  return queryInterface.bulkDelete('games', null, {});
+}

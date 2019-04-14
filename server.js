@@ -12,22 +12,75 @@ app.get('/', function (req, res) {
   res.render('index');
 });
 
-// Index - get all games
+// GET/ games - get all games - Index
 app.get('/games', function (req, res) {
-  //try and get all the records
   db.game.findAll().then(function (games) {
-    console.log('are these the... ' + games);
     res.render('games/index', { games });
   });
-  //find data within data object
-  //res.render data into ejs page
 });
 
+// GET method to add a new game
+app.get('/games/new', function (req, res) {
+  res.render('games/create');
+});
+
+// POST - create a new game - Create
+app.post('/games', function (req, res) {
+  db.game.create({
+    name: req.body.name,
+    description: req.body.description,
+    players: req.body.players
+  }).then (function(data) {
+      res.redirect('/games');
+  }).catch ( 
+    function(err) {
+      res.send(err.errors(0).message);
+  });
+});
+
+// GET /games/3 - gets one game - Show
 app.get('/games/:id', function (req, res) {
-  db.game.findById(parseInt(req.params.id)).then(function (game) {
+  db.game.findByPk(req.params.id).then(function (game) {
     res.render('games/show', { game });
-  })
-})
+  });
+});
+
+// DELETE /games/ - Delete
+
+app.delete('games/:id', function (req, res) {
+  db.game.destroy({
+    where: { id: req.params.id }
+  }).then(function () {
+    res.redirect('/games');
+  });
+});
+// GET /games/id/edit - returns populated edit form - Edit
+app.get('/games/:id/edit', function (req, res) {
+  db.game.findByPk(req.params.id).then(function (game) {
+    res.render('games/edit', { game });
+  });
+});
+
+//
+// PUT /games/ - Update
+app.put('/games/:id', function (req, res) {
+  db.game.findOne({
+    where: { id: req.params.id }
+
+    })
+    .then(function (game) {
+      game.update({
+        name: req.body.name,
+        description: req.body.description,
+        players: req.body.players
+      });
+    })
+      .then(function (game) { 
+        res.redirect('/games/' + req.params.id);
+  });
+});
 
 app.listen(3000);
+  console.log('listening on port 3000');
+
 

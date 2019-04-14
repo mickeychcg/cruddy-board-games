@@ -1,0 +1,15 @@
+<% include ../partials/header.ejs %>
+<div class= "container">
+  <h1>Add a new game</h1>
+  <form method="POST" action="/games">
+      <p>Name</p>
+        <input type="text" name="name">
+      <p>Players</p>
+        <input type="number" name="players">
+      <p>Description</p>
+        <textarea rows="4" columns="50" name="" ></textarea><br>
+      <input type="submit" value="Add to Games"></input>
+  </form>
+</div>
+
+<% include ../partials/footer.ejs %>

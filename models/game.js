@@ -1,11 +1,14 @@
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const game = sequelize.define('game', {
-    name: DataTypes.STRING,
+    name: {
+      type: DataTypes.STRING,
+      validate: { len: [8, 10] }
+    },
     description: DataTypes.STRING,
     player: DataTypes.INTEGER
   }, {});
-  game.associate = function(models) {
+  game.associate = function (models) {
     // associations can be defined here
   };
   return game;

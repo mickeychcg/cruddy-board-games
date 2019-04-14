@@ -1,6 +1,12 @@
 <% include ./partials/header.ejs %>
 
-<h1>HOME PAGE</h1>
-<p>Wanna see my games? Click <a href='/games'>here></a>!</p>
+<div class="container">
+  <h1>My Favorite Games!</h1>
+  <h2>These are a few of my favorite games:</h2>
+  <h3>Wanna see 'em? Click...</h3>
+  <form action="/games"> 
+    <input type="submit" value="Here"></input>
+  </form>
+</div>
 
 <% include ./partials/footer.ejs %>

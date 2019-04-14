@@ -1,10 +1,11 @@
 <% include ../partials/header.ejs %>
+
 <h2>Edit a Game</h2>
 <div class="container">
   <h2><%= game.name %></h2>
 
   <p><%= game.description %></p>
-  <p>Maximum mumber of players: <%= game.players %></p>
+  <p>Maximum mumber of players: <%= game.player %></p>
 
   <form action="none">
     <input type="submit" value="Delete" method="POST" action="/games/<%= game.id %>?_method=DELETE">
@@ -14,8 +15,9 @@
       <p>Name</p> <input type="text" name="name" value='<%= game.name %>'>
       <p>Players</p> <input type='number' value='<%= game.players %>'>
       <p>Description</p> <textarea rows="4" columns="50" name="description">'<%= game.description %>'</textarea><br>
-      <input type="submit" value="Update">
+      <input type="submit" value="Update"> 
     </form>
   </div>
 </div>
+
 <% include ../partials/footer.ejs %>
